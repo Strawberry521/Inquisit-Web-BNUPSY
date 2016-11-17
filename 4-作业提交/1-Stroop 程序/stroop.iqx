@@ -1,0 +1,106 @@
+﻿<item instruction>
+	/1 = "在屏幕的中央会随机出现带有颜色的中文字，请判断该字的颜色，如果是红色请按“R”键，如果是蓝色请按“B”键，如果是绿色“G”键。"
+</item>
+
+<item any>
+	/1 = "请按任意键开始实验"
+</item>
+
+<item red>
+   /1 = "红"
+   /2 = "蓝"
+   /3 = "绿"
+</item>
+
+<item blue>
+   /1 = "红"
+   /2 = "蓝"
+   /3 = "绿"
+</item>
+
+<item green>
+   /1 = "红"
+   /2 = "蓝"
+   /3 = "绿"
+</item>
+
+<text instructiontxt>
+    /items = instruction
+	/fontstyle = ("宋体", 4pct)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,255,255)
+	/size = (1300,800)
+	/hjustify = left
+</text>
+
+<text anykeytxt>
+	/items = any
+	/vposition = 70 pct
+	/fontstyle = ("宋体", 24pt)
+	/txcolor = (255,0,0)
+	/txbgcolor = (transparent)
+</text>
+
+<text redtxt>
+	/items = red
+	/fontstyle = ("宋体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (255,0,0)
+</text>
+
+<text greentxt>
+	/items = green
+	/fontstyle = ("宋体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,255,0)
+</text>
+
+<text bluetxt>
+	/items = blue
+	/fontstyle = ("宋体",60ptc)
+	/txbgcolor = (0,0,0)
+	/txcolor = (0,0,255)
+</text>
+
+<trial instruction>
+	/validresponse = (anyresponse)
+	/stimulusframes = [1=instructiontxt,anykeytxt]
+	/recorddata = false
+</trial>
+
+<trial redtrial>
+	/pretrialpause = 500
+	/validresponse = ("R","G","B")
+	/correctresponse = ("R")
+	/stimulusframes = [1 = redtxt]
+</trial>
+
+<trial greentrial>
+	/pretrialpause = 500
+	/validresponse = ("R","G","B")
+	/correctresponse = ("G")
+	/stimulusframes = [1 = greentxt]
+</trial>
+
+<trial bluetrial>
+	/pretrialpause = 500
+	/validresponse = ("R","G","B")
+	/correctresponse = ("B")
+	/stimulusframes = [1 = bluetxt]
+</trial>
+
+<block instructionblk>
+	/screencolor = (0,0,0)
+	/trials = [1 = instruction]
+</block>
+
+
+<block colorblk>
+	/screencolor = (0,0,0)
+	/blockfeedback = (meanlatency,correct)
+	/trials = [1-18 = noreplace(redtrial, greentrial,bluetrial)]
+</block>
+
+<expt>
+  /blocks = [1 = instructionblk;2 = colorblk]
+</expt>
